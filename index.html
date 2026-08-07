@@ -1,0 +1,908 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#071B4D">
+<meta name="description" content="Propuesta interactiva para presentar la experiencia de las licenciaturas en línea UIM.">
+<title>Vive UIM en Línea | Universidad Iberomexicana</title>
+<style>
+:root{
+  --navy:#061842;
+  --navy-2:#0b3273;
+  --blue:#1d64d8;
+  --red:#d7192d;
+  --red-2:#ff3a50;
+  --sky:#edf4ff;
+  --cream:#f7f9fc;
+  --ink:#13243d;
+  --muted:#637289;
+  --line:#dfe7f1;
+  --white:#fff;
+  --shadow:0 22px 55px rgba(6,24,66,.14);
+  --shadow-soft:0 12px 30px rgba(6,24,66,.09);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Poppins,Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);
+  background:#fff;
+  overflow-x:hidden;
+}
+.hero h1,.section-head h2,.exp-stage h3,.work-copy h3,.eco-stage h3,.profile-main h2,.cta-box h2{font-family:Poppins,Inter,ui-sans-serif,system-ui,sans-serif;}
+a{text-decoration:none;color:inherit}
+button,input,select{font:inherit}
+button{cursor:pointer}
+img{display:block;max-width:100%}
+.container{width:min(1180px,calc(100% - 38px));margin-inline:auto}
+.section{padding:94px 0;position:relative}
+.section-head{max-width:790px;margin:0 auto 44px;text-align:center}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 12px;border-radius:999px;
+  background:rgba(215,25,45,.09);color:var(--red);
+  font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase
+}
+.section-head h2{
+  margin:15px 0 12px;color:var(--navy);
+  font-size:clamp(2.2rem,4.8vw,3.7rem);
+  line-height:1;letter-spacing:-.045em
+}
+.section-head p{margin:0;color:var(--muted);font-size:1.03rem;line-height:1.7}
+.accent{color:var(--red)}
+.btn{
+  min-height:52px;padding:0 22px;border-radius:15px;
+  border:1px solid transparent;display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  font-weight:850;transition:.25s ease
+}
+.btn:hover{transform:translateY(-3px)}
+.btn-primary{background:linear-gradient(135deg,var(--red),var(--red-2));color:#fff;box-shadow:0 14px 28px rgba(215,25,45,.26)}
+.btn-light{background:#fff;color:var(--navy);box-shadow:var(--shadow-soft)}
+.btn-outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.3)}
+.reveal{opacity:0;transform:translateY(24px);transition:.65s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* Header */
+.header{
+  position:fixed;inset:0 0 auto;z-index:80;
+  background:rgba(4,19,52,.72);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(255,255,255,.08)
+}
+.nav{height:82px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;color:#fff}
+.brand img{width:58px;height:58px;object-fit:contain}
+.brand strong{display:block;line-height:1.05}
+.brand small{display:block;color:rgba(255,255,255,.65);margin-top:4px;font-size:.72rem}
+.nav-links{display:flex;gap:27px;color:#fff;font-size:.88rem;font-weight:780}
+.nav-links a{opacity:.76;transition:.2s}
+.nav-links a:hover{opacity:1}
+.menu{
+  display:none;width:45px;height:45px;border-radius:12px;
+  border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:1.25rem
+}
+
+/* Hero */
+.hero{
+  min-height:835px;display:grid;align-items:center;color:#fff;position:relative;isolation:isolate;overflow:hidden;
+  background:
+    radial-gradient(circle at 78% 27%,rgba(37,107,255,.44),transparent 27%),
+    radial-gradient(circle at 18% 88%,rgba(215,25,45,.24),transparent 27%),
+    linear-gradient(125deg,#03143a 0%,#072765 60%,#061842 100%)
+}
+.hero:before{
+  content:"";position:absolute;width:720px;height:720px;border-radius:50%;
+  right:-300px;top:-220px;border:84px solid rgba(255,255,255,.035);z-index:-1
+}
+.hero:after{
+  content:"";position:absolute;width:390px;height:780px;right:-230px;top:-10px;
+  background:linear-gradient(145deg,transparent 17%,var(--red) 17% 63%,transparent 63%);z-index:-1
+}
+.hero-grid{padding-top:116px;display:grid;grid-template-columns:.92fr 1.08fr;gap:54px;align-items:center}
+.hero h1{
+  margin:18px 0 22px;
+  font-size:clamp(3.45rem,6.7vw,5.9rem);line-height:.94;letter-spacing:-.057em
+}
+.hero p{margin:0;max-width:660px;color:rgba(255,255,255,.78);font-size:1.16rem;line-height:1.67}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin:32px 0 27px}
+.hero-signs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;max-width:940px}
+.hero-sign{
+  display:flex;align-items:center;gap:14px;padding:15px 16px;border-radius:20px;
+  background:linear-gradient(135deg,rgba(3,24,74,.72),rgba(9,53,120,.65));border:1px solid rgba(255,255,255,.16);
+  backdrop-filter:blur(14px);box-shadow:0 18px 32px rgba(0,0,0,.18);position:relative;overflow:hidden
+}
+.hero-sign:before{content:"";position:absolute;inset:auto -20px -28px auto;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.06)}
+.hero-sign-icon{width:52px;height:52px;border-radius:16px;display:grid;place-items:center;font-size:1.35rem;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.08);flex:0 0 52px}
+.hero-sign strong{display:block;font-size:1rem;line-height:1.1}
+.hero-sign small{display:block;margin-top:4px;color:rgba(255,255,255,.72);font-size:.76rem;line-height:1.35}
+.hero-sign-red .hero-sign-icon{background:linear-gradient(145deg,#ff6475,#d7192d)}
+.hero-sign-gold .hero-sign-icon{background:linear-gradient(145deg,#ffca63,#ff8a00)}
+.hero-sign-cyan .hero-sign-icon{background:linear-gradient(145deg,#55d6ff,#1d64d8)}
+.hero-visual{position:relative;min-height:565px}
+.hero-photo{
+  position:absolute;inset:34px 0 0 35px;width:calc(100% - 35px);height:500px;object-fit:cover;object-position:55% center;
+  border-radius:42px 42px 125px 42px;box-shadow:0 42px 90px rgba(0,0,0,.37);
+  border:1px solid rgba(255,255,255,.17)
+}
+.float-card{
+  position:absolute;padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.97);
+  color:var(--navy);box-shadow:0 18px 45px rgba(0,0,0,.24);animation:float 4.6s ease-in-out infinite
+}
+.float-card b{display:block;font-size:.84rem}
+.float-card small{display:block;color:#76849a;font-size:.7rem;margin-top:4px}
+.f1{left:-8px;top:35px}.f2{right:-12px;top:118px;animation-delay:-1.5s}.f3{left:40px;bottom:5px;animation-delay:-2.3s}
+@keyframes float{50%{transform:translateY(-11px)}}
+
+/* Experience navigator */
+.experience{
+  background:
+    radial-gradient(circle at 8% 17%,rgba(29,100,216,.08),transparent 27%),
+    linear-gradient(180deg,#fff,#f7f9fc)
+}
+.experience-shell{
+  display:grid;grid-template-columns:300px 1fr;gap:22px;
+  padding:20px;border-radius:30px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)
+}
+.exp-nav{display:grid;gap:9px}
+.exp-tab{
+  display:grid;grid-template-columns:50px 1fr;gap:12px;align-items:center;text-align:left;
+  padding:14px;border:1px solid transparent;border-radius:17px;background:#f6f8fc;color:var(--ink);
+  transition:.25s ease
+}
+.exp-tab:hover,.exp-tab.active{background:linear-gradient(135deg,#071d52,#0c428e);color:#fff;transform:translateX(5px)}
+.exp-number{
+  width:43px;height:43px;border-radius:14px;display:grid;place-items:center;
+  background:#fff;color:var(--red);font-weight:900;box-shadow:0 7px 18px rgba(6,24,66,.08)
+}
+.exp-tab strong{display:block;font-size:.92rem}
+.exp-tab small{display:block;margin-top:3px;color:var(--muted);font-size:.72rem}
+.exp-tab.active small,.exp-tab:hover small{color:rgba(255,255,255,.7)}
+.exp-stage{
+  min-height:520px;padding:34px;border-radius:28px;position:relative;overflow:hidden;color:#fff;
+  background:
+    radial-gradient(circle at 88% 12%,rgba(255,255,255,.18),transparent 24%),
+    radial-gradient(circle at 10% 90%,rgba(255,97,127,.22),transparent 23%),
+    linear-gradient(135deg,#071a49,#0f4ea8)
+}
+.exp-stage:after{
+  content:"";position:absolute;width:290px;height:290px;border-radius:50%;
+  right:-100px;bottom:-120px;border:54px solid rgba(255,255,255,.07)
+}
+.exp-badge{display:inline-flex;padding:8px 11px;border-radius:999px;background:linear-gradient(145deg,#ff5970,#d7192d);font-size:.72rem;font-weight:900;letter-spacing:.04em}
+.exp-stage h3{margin:20px 0 10px;font-size:2.35rem;letter-spacing:-.04em}
+.exp-stage p{margin:0;max-width:640px;color:rgba(255,255,255,.75);line-height:1.68}
+.exp-content{position:relative;z-index:2;display:grid;grid-template-columns:1fr .92fr;gap:30px;align-items:center}
+.exp-demo{
+  margin-top:24px;padding:18px;border-radius:20px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.14)
+}
+.exp-demo h4{margin:0 0 12px;font-size:1rem}
+.exp-demo ul{margin:0;padding-left:18px;color:rgba(255,255,255,.78);line-height:1.7}
+.exp-visual{
+  min-height:370px;border-radius:24px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  display:grid;grid-template-rows:1.06fr .94fr;gap:14px;padding:14px;position:relative;overflow:hidden
+}
+.exp-poster{position:relative;border-radius:22px;overflow:hidden;min-height:180px;background:#0c316d}
+.exp-poster img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05) contrast(1.03)}
+.exp-poster:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,rgba(6,24,66,.78))}
+.exp-sticker{position:absolute;top:14px;left:14px;z-index:2;padding:8px 10px;border-radius:999px;background:#fff;color:var(--navy);font-size:.72rem;font-weight:900;box-shadow:0 10px 22px rgba(0,0,0,.18)}
+.exp-overlay{position:absolute;left:16px;right:16px;bottom:14px;z-index:2}
+.exp-overlay span{display:inline-flex;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.16);font-size:.68rem;font-weight:800;color:#fff;margin-bottom:8px}
+.exp-overlay strong{display:block;font-size:1.12rem;line-height:1.15;color:#fff}
+.poster-pills{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}
+.poster-pill{padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.12);font-size:.65rem;color:rgba(255,255,255,.82);font-weight:700}
+.screen{
+  width:100%;padding:16px;border-radius:19px;background:#fff;color:var(--navy);box-shadow:0 20px 50px rgba(0,0,0,.22)
+}
+.screen-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #e5ebf3;padding-bottom:10px;margin-bottom:12px;font-size:.72rem;font-weight:900}
+.screen-row{padding:11px 12px;border-radius:12px;background:#f4f7fb;margin-top:9px;font-size:.75rem;color:#516177}
+.screen-row strong{color:var(--navy)}
+.exp-dots{display:flex;gap:7px;margin-top:18px}
+.exp-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.28)}
+.exp-dot.active{width:26px;border-radius:999px;background:#ffd166}
+
+/* Modality */
+.modality-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:17px}
+.modality-card{
+  padding:26px 22px;border-radius:26px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);
+  transition:.25s ease;position:relative;overflow:hidden
+}
+.modality-card:after{content:"";position:absolute;width:110px;height:110px;border-radius:50%;right:-40px;top:-42px;opacity:.16}
+.modality-card:hover{transform:translateY(-8px);box-shadow:var(--shadow)}
+.icon{
+  width:62px;height:62px;border-radius:20px;display:grid;place-items:center;
+  color:#fff;font-size:1.45rem;box-shadow:0 12px 24px rgba(6,24,66,.14)
+}
+.icon span{transform:translateY(-1px)}
+.modality-card.live:after{background:#55d6ff}.modality-card.recorded:after{background:#ffd166}.modality-card.contact:after{background:#ff8393}.modality-card.feedback:after{background:#7be0a0}
+.modality-card.live .icon{background:linear-gradient(145deg,#1d64d8,#55d6ff)}
+.modality-card.recorded .icon{background:linear-gradient(145deg,#ffb703,#ff7b00)}
+.modality-card.contact .icon{background:linear-gradient(145deg,#ff5b77,#d7192d)}
+.modality-card.feedback .icon{background:linear-gradient(145deg,#25c685,#128f5d)}
+.modality-card h3{margin:19px 0 8px;color:var(--navy);font-size:1.08rem}
+.modality-card p{margin:0;color:var(--muted);line-height:1.58;font-size:.9rem}
+
+/* Ecosystem */
+.ecosystem{background:#061842;color:#fff;overflow:hidden}
+.ecosystem .section-head h2{color:#fff}
+.ecosystem .section-head p{color:rgba(255,255,255,.67)}
+.eco-layout{display:grid;grid-template-columns:.82fr 1.18fr;gap:28px;align-items:stretch}
+.eco-menu{display:grid;gap:10px}
+.eco-btn{
+  display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:12px;text-align:left;
+  padding:15px;border-radius:18px;border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.07);color:#fff;transition:.25s ease
+}
+.eco-btn:hover,.eco-btn.active{background:#fff;color:var(--navy);transform:translateX(6px)}
+.eco-symbol{
+  width:58px;height:58px;border-radius:17px;display:grid;place-items:center;
+  background:rgba(255,255,255,.12);font-size:1.35rem;overflow:hidden
+}
+.eco-btn.active .eco-symbol,.eco-btn:hover .eco-symbol{background:#edf4ff}
+.platform-logo{display:block;max-width:46px;max-height:24px;width:auto;height:auto}
+.platform-logo.wide{max-width:52px}
+.logo-symbol{font-size:1.45rem}
+.eco-btn strong{display:block;font-size:.94rem}
+.eco-btn small{display:block;margin-top:4px;color:rgba(255,255,255,.62);font-size:.72rem}
+.eco-btn.active small,.eco-btn:hover small{color:var(--muted)}
+.eco-arrow{font-weight:900}
+.eco-stage{
+  min-height:500px;padding:36px;border-radius:28px;background:
+    radial-gradient(circle at 88% 12%,rgba(255,255,255,.17),transparent 24%),
+    linear-gradient(135deg,#0b397e,#0b55b0);
+  border:1px solid rgba(255,255,255,.14);position:relative;overflow:hidden
+}
+.eco-stage:after{
+  content:"";position:absolute;width:280px;height:280px;border-radius:50%;right:-100px;bottom:-125px;
+  border:52px solid rgba(255,255,255,.07)
+}
+.eco-stage h3{margin:0 0 12px;font-size:2.2rem;letter-spacing:-.035em}
+.eco-stage p{margin:0;max-width:650px;color:rgba(255,255,255,.73);line-height:1.65}
+.eco-showcase{
+  margin-top:26px;padding:19px;border-radius:22px;background:rgba(255,255,255,.10);
+  border:1px solid rgba(255,255,255,.15);position:relative;z-index:2
+}
+.eco-showcase-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.eco-feature{padding:15px;border-radius:15px;background:rgba(255,255,255,.09);font-size:.82rem;color:rgba(255,255,255,.78)}
+.eco-feature b{display:block;color:#fff;margin-bottom:4px}
+
+/* Work methods */
+.work{background:linear-gradient(180deg,#f7f9fc,#fff)}
+.work-tabs{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:25px}
+.work-tab{
+  padding:11px 14px;border-radius:999px;border:1px solid var(--line);background:#fff;color:var(--muted);font-weight:850
+}
+.work-tab.active{background:var(--navy);color:#fff;border-color:var(--navy)}
+.work-stage{
+  display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;
+  padding:32px;border-radius:28px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)
+}
+.work-copy h3{margin:0 0 10px;color:var(--navy);font-size:2rem}
+.work-copy p{margin:0;color:var(--muted);line-height:1.65}
+.work-points{display:grid;gap:10px;margin-top:22px}
+.work-point{display:flex;gap:10px;align-items:flex-start;color:#42546d;font-size:.9rem}
+.check{width:24px;height:24px;border-radius:50%;display:grid;place-items:center;background:rgba(215,25,45,.1);color:var(--red);font-size:.72rem;font-weight:900;flex:0 0 24px}
+.work-visual{
+  min-height:360px;border-radius:23px;background:
+    radial-gradient(circle at 82% 20%,rgba(255,255,255,.2),transparent 23%),
+    linear-gradient(135deg,#071d52,#0d4da4);display:grid;place-items:center;padding:25px
+}
+.assignment{
+  width:85%;padding:22px;border-radius:22px;background:#fff;color:var(--navy);box-shadow:0 22px 55px rgba(0,0,0,.27)
+}
+.assignment .topline{display:flex;justify-content:space-between;gap:10px;padding-bottom:12px;border-bottom:1px solid #e5ebf3}
+.assignment h4{margin:0;font-size:1.05rem}
+.assignment small{color:#77869a}
+.assignment .case{margin-top:15px;padding:14px;border-radius:14px;background:#f5f8fc;color:#53627a;font-size:.8rem;line-height:1.55}
+.assignment .feedback{margin-top:12px;padding:12px;border-radius:13px;background:#eef8f2;color:#28734a;font-size:.77rem}
+
+/* Videos */
+.video-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:20px}
+.video-main,.video-side{border-radius:27px;overflow:hidden;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft)}
+.video-main .thumb{aspect-ratio:16/8.8}
+.thumb{position:relative;overflow:hidden;background:#071d52}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.65))}
+.play{
+  position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:76px;height:76px;border-radius:50%;display:grid;place-items:center;
+  background:rgba(255,255,255,.18);border:2px solid #fff;color:#fff;font-size:1.5rem
+}
+.video-label{position:absolute;z-index:2;left:18px;bottom:16px;color:#fff}
+.video-label b{display:block;font-size:1.2rem}
+.video-label small{color:rgba(255,255,255,.72)}
+.video-body{padding:22px}
+.video-body h3{margin:0 0 8px;color:var(--navy)}
+.video-body p{margin:0;color:var(--muted);line-height:1.55;font-size:.9rem}
+.video-stack{display:grid;gap:20px}
+.video-side{display:grid;grid-template-columns:155px 1fr;min-height:190px}
+.video-side .thumb{min-height:190px}
+.video-side .video-body{display:flex;flex-direction:column;justify-content:center}
+
+/* Benefits */
+.benefits{background:linear-gradient(135deg,#071b4d,#0c3b82);color:#fff;overflow:hidden}
+.benefits .section-head h2{color:#fff}
+.benefits .section-head p{color:rgba(255,255,255,.68)}
+.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}
+.benefit{
+  padding:24px;border-radius:22px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)
+}
+.benefit strong{display:block;font-size:1.1rem;margin:14px 0 7px}
+.benefit p{margin:0;color:rgba(255,255,255,.68);line-height:1.55;font-size:.88rem}
+
+/* Careers */
+.career-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.career{
+  padding:24px;border-radius:24px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);
+  position:relative;overflow:hidden;transition:.28s ease
+}
+.career:hover{transform:translateY(-8px);box-shadow:var(--shadow);border-color:rgba(215,25,45,.27)}
+.career:after{
+  content:"";position:absolute;width:115px;height:115px;border-radius:50%;
+  right:-44px;top:-45px;background:linear-gradient(145deg,rgba(29,100,216,.11),rgba(215,25,45,.1))
+}
+.career-icon{width:58px;height:58px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(145deg,#eef4ff,#fff0f2);font-size:1.8rem}
+.career h3{margin:22px 0 9px;color:var(--navy);font-size:1.25rem}
+.career p{margin:0 0 18px;color:var(--muted);font-size:.89rem;line-height:1.55}
+.career button{border:0;background:transparent;padding:0;color:var(--red);font-weight:900}
+
+/* Profile */
+.profile-layout{
+  display:grid;grid-template-columns:310px 1fr;border-radius:31px;overflow:hidden;
+  background:linear-gradient(135deg,#061945,#0b3e89);color:#fff;box-shadow:var(--shadow)
+}
+.profile-side{
+  padding:34px;background:linear-gradient(155deg,var(--red) 0 58%,#910617 58%);
+  display:flex;flex-direction:column;justify-content:space-between
+}
+.profile-side img{width:110px;height:110px;object-fit:contain;margin:auto}
+.profile-side h3{margin:22px 0 8px;font-size:1.9rem}
+.profile-side p{margin:0;color:rgba(255,255,255,.72);line-height:1.55;font-size:.88rem}
+.profile-main{padding:42px}
+.profile-switch{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:24px}
+.profile-btn{
+  padding:9px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.16);
+  background:rgba(255,255,255,.08);color:#fff;font-weight:800;font-size:.78rem
+}
+.profile-btn.active{background:#fff;color:var(--navy)}
+.profile-main h2{margin:0 0 11px;font-size:2.5rem}
+.profile-intro{margin:0;color:rgba(255,255,255,.7);line-height:1.6}
+.profile-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:25px}
+.profile-item{padding:17px;border-radius:17px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12)}
+.profile-item b{display:block;margin-bottom:6px}
+.profile-item p{margin:0;color:rgba(255,255,255,.7);font-size:.86rem;line-height:1.5}
+
+/* Route */
+.route{background:linear-gradient(180deg,#f6f9fd,#fff)}
+.route-shell{position:relative}
+.route-line{
+  position:absolute;left:7%;right:7%;top:61px;height:4px;border-radius:999px;
+  background:linear-gradient(90deg,var(--red),#ff9f1c,#7447b8,#1f9c72,var(--blue));opacity:.28
+}
+.route-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:13px;position:relative}
+.route-step{text-align:center}
+.route-dot{
+  width:48px;height:48px;margin:0 auto 13px;border-radius:50%;display:grid;place-items:center;color:#fff;background:var(--navy);
+  font-weight:900;box-shadow:0 9px 18px rgba(6,24,66,.18)
+}
+.route-icon{
+  width:80px;height:80px;margin:0 auto 13px;border-radius:24px;display:grid;place-items:center;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow-soft);font-size:1.9rem
+}
+.route-step h3{margin:0 0 6px;color:var(--navy);font-size:.96rem}
+.route-step p{margin:0;color:var(--muted);font-size:.76rem;line-height:1.45}
+
+/* CTA */
+.cta{padding:0 0 78px}
+.cta-box{
+  padding:50px;border-radius:33px;display:flex;align-items:center;justify-content:space-between;gap:30px;
+  background:
+    radial-gradient(circle at 85% 15%,rgba(255,255,255,.18),transparent 25%),
+    linear-gradient(135deg,var(--red),#ef3348);color:#fff;box-shadow:0 28px 68px rgba(215,25,45,.27)
+}
+.cta-box h2{margin:0 0 9px;font-size:clamp(2.1rem,4vw,3.2rem);line-height:1.04}
+.cta-box p{margin:0;color:rgba(255,255,255,.8)}
+.cta-actions{display:flex;gap:12px;flex-wrap:wrap}
+
+footer{padding:32px 0;background:#03132f;color:rgba(255,255,255,.68)}
+.footer-row{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.footer-brand{display:flex;align-items:center;gap:11px}
+.footer-brand img{width:56px;height:56px;object-fit:contain}
+
+/* Modal */
+.modal{
+  position:fixed;inset:0;z-index:120;display:none;align-items:center;justify-content:center;padding:20px;
+  background:rgba(3,15,41,.78);backdrop-filter:blur(12px)
+}
+.modal.active{display:flex}
+.modal-card{width:min(760px,100%);max-height:90vh;overflow:auto;border-radius:28px;background:#fff;box-shadow:0 40px 90px rgba(0,0,0,.35)}
+.modal-head{padding:34px;color:#fff;background:linear-gradient(135deg,#061945,#0c489c);position:relative}
+.modal-close{position:absolute;right:17px;top:17px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-weight:900}
+.modal-head h2{margin:18px 0 9px;font-size:2.3rem}
+.modal-head p{margin:0;color:rgba(255,255,255,.72);line-height:1.6}
+.modal-body{padding:30px 34px 38px}
+.modal-body h3{color:var(--navy)}
+.modal-list{display:grid;gap:10px}
+.modal-list div{padding:13px;border-radius:14px;background:#f5f8fc;color:#526078}
+body.modal-open{overflow:hidden}
+
+@media(max-width:1030px){
+  .nav-links{display:none}.menu{display:block}
+  .nav-links.open{display:flex;position:absolute;top:76px;left:18px;right:18px;flex-direction:column;padding:20px;border-radius:18px;background:#04183f}
+  .hero-grid,.eco-layout{grid-template-columns:1fr}
+  .hero-signs{grid-template-columns:1fr 1fr}
+  .exp-visual{grid-template-rows:1fr 1fr}
+  .hero-visual{min-height:500px}
+  .experience-shell{grid-template-columns:1fr}
+  .exp-nav{grid-template-columns:repeat(5,1fr)}
+  .exp-tab{grid-template-columns:1fr;text-align:center}.exp-number{margin:auto}
+  .exp-tab small{display:none}
+  .modality-grid{grid-template-columns:repeat(2,1fr)}
+  .work-stage{grid-template-columns:1fr}
+  .video-grid{grid-template-columns:1fr}
+  .benefit-grid,.career-grid{grid-template-columns:repeat(2,1fr)}
+  .profile-layout{grid-template-columns:1fr}.profile-side{display:none}
+  .route-grid{grid-template-columns:repeat(3,1fr);row-gap:35px}.route-line{display:none}
+  .cta-box{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:700px){
+  .container{width:min(100% - 24px,1180px)}
+  .brand strong,.brand small{display:none}.brand img{width:52px;height:52px}.header .btn-primary{display:none}.nav{height:72px}
+  .hero-grid{padding-top:96px}.hero h1{font-size:clamp(3rem,14vw,4.5rem)}
+  .hero-visual{min-height:400px}.hero-photo{inset:25px 0 0;height:355px;width:100%;border-radius:28px 28px 85px 28px}.float-card{display:none}
+  .hero-signs{grid-template-columns:1fr}
+  .hero-sign{padding:14px 15px}
+  .section{padding:72px 0}
+  .experience-shell{padding:12px}.exp-nav{grid-template-columns:1fr 1fr}.exp-content{grid-template-columns:1fr}.exp-stage{padding:25px}.exp-visual{min-height:320px;grid-template-rows:auto auto}
+  .modality-grid,.benefit-grid,.career-grid,.profile-grid{grid-template-columns:1fr}
+  .eco-showcase-grid{grid-template-columns:1fr}
+  .work-stage{padding:22px}.video-side{grid-template-columns:1fr}.video-side .thumb{min-height:220px}
+  .route-grid{grid-template-columns:repeat(2,1fr)}
+  .cta-box{padding:34px 24px}
+  .footer-row{flex-direction:column;align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="container nav">
+    <a class="brand" href="#inicio">
+      <img src="assets/logo-orgullo-uim.png" alt="Logotipo Orgullo UIM">
+      <span><strong>Universidad Iberomexicana</strong><small>Licenciaturas en línea</small></span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#experiencia">Cómo se trabaja</a>
+      <a href="#plataformas">Plataformas</a>
+      <a href="#videos">Clase muestra</a>
+      <a href="#oferta">Licenciaturas</a>
+      <a href="#perfil">Perfil de egreso</a>
+    </nav>
+    <a class="btn btn-primary" href="#ruta">Conocer la experiencia</a>
+    <button class="menu" id="menuBtn" type="button" aria-label="Abrir menú">☰</button>
+  </div>
+</header>
+
+<main>
+<section class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div>
+      <span class="eyebrow" style="background:rgba(255,255,255,.10);color:#fff;border:1px solid rgba(255,255,255,.12)">Antes de elegir dónde estudiar, conoce cómo estudiarás</span>
+      <h1>Vive la experiencia <span class="accent">UIM en línea.</span></h1>
+      <p>Descubre cómo son las clases, qué plataformas utilizarás, cómo trabajarás tus actividades y qué acompañamiento tendrás durante tu licenciatura.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#experiencia">Comenzar recorrido</a>
+        <a class="btn btn-light" href="#videos">Ver clase muestra</a>
+      </div>
+      <div class="hero-signs">
+        <div class="hero-sign hero-sign-red"><span class="hero-sign-icon">📅</span><div><strong>2 veces por semana</strong><small>clases en vivo programadas</small></div></div>
+        <div class="hero-sign hero-sign-gold"><span class="hero-sign-icon">⏱️</span><div><strong>2 horas por sesión</strong><small>tiempo real de aprendizaje</small></div></div>
+        <div class="hero-sign hero-sign-cyan"><span class="hero-sign-icon">💬</span><div><strong>Comunicación directa</strong><small>contacto cercano con tus docentes</small></div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <img class="hero-photo" src="assets/hero-estudiantes.jpg" alt="Jóvenes participando en una experiencia de aprendizaje en línea">
+      <div class="float-card f1"><b>🔴 Clase en vivo</b><small>Derecho Constitucional · 7:00 p. m.</small></div>
+      <div class="float-card f2"><b>✅ Actividad revisada</b><small>Consulta la retroalimentación docente</small></div>
+      <div class="float-card f3"><b>▶ Clase grabada disponible</b><small>Continúa cuando tu horario lo permita</small></div>
+    </div>
+  </div>
+</section>
+
+<section class="section experience" id="experiencia">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Conoce la dinámica real</span>
+      <h2>Así vives tu experiencia <span class="accent">académica en línea.</span></h2>
+      <p>Recorre cada momento y descubre con imágenes, ejemplos y pasos claros cómo estudiarás dentro de UIM.</p>
+    </div>
+    <div class="experience-shell reveal">
+      <div class="exp-nav">
+        <button class="exp-tab active" data-exp="0"><span class="exp-number">1</span><span><strong>Organiza tu semana</strong><small>Materiales y fechas</small></span></button>
+        <button class="exp-tab" data-exp="1"><span class="exp-number">2</span><span><strong>Conéctate en vivo</strong><small>Sesión de dos horas</small></span></button>
+        <button class="exp-tab" data-exp="2"><span class="exp-number">3</span><span><strong>Trabaja una actividad</strong><small>Casos y proyectos</small></span></button>
+        <button class="exp-tab" data-exp="3"><span class="exp-number">4</span><span><strong>Recibe retroalimentación</strong><small>Evaluación docente</small></span></button>
+        <button class="exp-tab" data-exp="4"><span class="exp-number">5</span><span><strong>Continúa a tu ritmo</strong><small>Clases grabadas</small></span></button>
+      </div>
+      <div class="exp-stage">
+        <div class="exp-content">
+          <div>
+            <span class="exp-badge" id="expBadge">INICIO DE SEMANA</span>
+            <h3 id="expTitle">Todo comienza con una ruta clara.</h3>
+            <p id="expText">Al ingresar a Moodle UIM encuentras tus materias, objetivos, materiales, fechas de entrega y actividades organizadas.</p>
+            <div class="exp-demo">
+              <h4 id="expDemoTitle">Lo que encontrarás</h4>
+              <ul id="expList"><li>Objetivo de aprendizaje</li><li>Materiales y recursos</li><li>Actividad de la semana</li><li>Fecha límite de entrega</li></ul>
+            </div>
+            <div class="exp-dots" id="expDots"></div>
+          </div>
+          <div class="exp-visual">
+            <div class="exp-poster">
+              <img id="expImage" src="assets/hero-estudiantes.jpg" alt="Escena de experiencia académica UIM">
+              <div class="exp-sticker" id="expSticker">SEMANA LISTA</div>
+              <div class="exp-overlay">
+                <span id="expMiniTag">Tu ruta en Moodle UIM</span>
+                <strong id="expVisualTitle">Organiza tu avance y prepárate para tu clase.</strong>
+                <div class="poster-pills" id="expPills">
+                  <span class="poster-pill">Materiales</span>
+                  <span class="poster-pill">Fechas</span>
+                  <span class="poster-pill">Objetivos</span>
+                </div>
+              </div>
+            </div>
+            <div class="screen">
+              <div class="screen-head"><span id="screenTitle">Mi semana académica</span><span>UIM</span></div>
+              <div id="screenRows">
+                <div class="screen-row"><strong>Derecho Constitucional</strong><br>Clase en vivo · Martes 7:00 p. m.</div>
+                <div class="screen-row"><strong>Actividad</strong><br>Análisis de un caso · Entrega viernes</div>
+                <div class="screen-row"><strong>Material disponible</strong><br>Lectura, presentación y video</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="modalidad">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Modalidad clara y flexible</span>
+      <h2>Flexibilidad con <span class="accent">acompañamiento real.</span></h2>
+      <p>La modalidad combina sesiones programadas, recursos disponibles y seguimiento directo de los docentes.</p>
+    </div>
+    <div class="modality-grid">
+      <article class="modality-card live reveal"><div class="icon"><span>◉</span></div><h3>Clases en vivo</h3><p>Dos veces por semana, con sesiones planeadas para explicar, participar y resolver dudas.</p></article>
+      <article class="modality-card recorded reveal"><div class="icon"><span>▶</span></div><h3>Clases grabadas</h3><p>Vuelve a ver la sesión cuando quieras repasar o recuperar contenido a tu ritmo.</p></article>
+      <article class="modality-card contact reveal"><div class="icon"><span>✉</span></div><h3>Contacto directo</h3><p>Comunícate desde Moodle UIM para recibir orientación y respuesta de tus docentes.</p></article>
+      <article class="modality-card feedback reveal"><div class="icon"><span>✓</span></div><h3>Retroalimentación</h3><p>Tus actividades se evalúan con observaciones claras para ayudarte a mejorar.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section ecosystem" id="plataformas">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="background:rgba(255,255,255,.1);color:#fff">Tu ecosistema académico</span>
+      <h2>Plataformas y servicios que <span class="accent">trabajan contigo.</span></h2>
+      <p>No son herramientas aisladas. Cada una cumple una función dentro de tu experiencia académica y profesional.</p>
+    </div>
+    <div class="eco-layout">
+      <div class="eco-menu reveal">
+        <button class="eco-btn active" data-eco="moodle"><span class="eco-symbol"><img class="platform-logo wide" src="assets/moodle-wordmark.svg" alt="Moodle"></span><span><strong>Moodle UIM</strong><small>Centro de tu experiencia académica</small></span><span class="eco-arrow">→</span></button>
+        <button class="eco-btn" data-eco="google"><span class="eco-symbol"><img class="platform-logo wide" src="assets/google-wordmark.svg" alt="Google"></span><span><strong>Google Workspace</strong><small>Colaboración y productividad</small></span><span class="eco-arrow">→</span></button>
+        <button class="eco-btn" data-eco="meet"><span class="eco-symbol"><span class="logo-symbol">🎥</span></span><span><strong>Clases y reuniones</strong><small>Interacción en tiempo real</small></span><span class="eco-arrow">→</span></button>
+        <button class="eco-btn" data-eco="vinculacion"><span class="eco-symbol"><span class="logo-symbol">🤝</span></span><span><strong>Convenios y vinculación</strong><small>Conexión con entornos profesionales</small></span><span class="eco-arrow">→</span></button>
+        <button class="eco-btn" data-eco="servicio"><span class="eco-symbol"><span class="logo-symbol">💼</span></span><span><strong>Servicio social en línea</strong><small>Orientación y seguimiento</small></span><span class="eco-arrow">→</span></button>
+      </div>
+      <div class="eco-stage reveal">
+        <h3 id="ecoTitle">Moodle UIM</h3>
+        <p id="ecoText">La plataforma principal de la comunidad en línea. Aquí encontrarás tus materias, actividades, materiales, mensajes, calificaciones y clases grabadas.</p>
+        <div class="eco-showcase">
+          <div class="eco-showcase-grid" id="ecoFeatures">
+            <div class="eco-feature"><b>Mis asignaturas</b>Consulta contenidos y recursos organizados.</div>
+            <div class="eco-feature"><b>Actividades</b>Entrega evidencias y revisa fechas límite.</div>
+            <div class="eco-feature"><b>Mensajes</b>Comunícate directamente con tus docentes.</div>
+            <div class="eco-feature"><b>Retroalimentación</b>Consulta observaciones y calificaciones.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section work" id="formas">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Aprender haciendo</span>
+      <h2>Formas de trabajo que te preparan para <span class="accent">situaciones reales.</span></h2>
+      <p>Explora los tipos de actividades que puedes realizar durante tu licenciatura.</p>
+    </div>
+    <div class="work-tabs reveal">
+      <button class="work-tab active" data-work="casos">Casos prácticos</button>
+      <button class="work-tab" data-work="proyectos">Proyectos</button>
+      <button class="work-tab" data-work="foros">Foros académicos</button>
+      <button class="work-tab" data-work="colaborativo">Trabajo colaborativo</button>
+      <button class="work-tab" data-work="evaluaciones">Evaluaciones</button>
+    </div>
+    <div class="work-stage reveal">
+      <div class="work-copy">
+        <h3 id="workTitle">Analiza casos relacionados con tu carrera.</h3>
+        <p id="workText">No solo memorizarás conceptos. Tendrás que interpretar una situación, identificar información importante y proponer una respuesta fundamentada.</p>
+        <div class="work-points" id="workPoints">
+          <div class="work-point"><span class="check">✓</span><span>Relaciona la teoría con situaciones profesionales.</span></div>
+          <div class="work-point"><span class="check">✓</span><span>Desarrolla análisis y pensamiento crítico.</span></div>
+          <div class="work-point"><span class="check">✓</span><span>Recibe observaciones directas de tu docente.</span></div>
+        </div>
+      </div>
+      <div class="work-visual">
+        <div class="assignment">
+          <div class="topline"><div><h4 id="assignmentTitle">Actividad · Análisis de caso</h4><small id="assignmentMeta">Derecho Constitucional</small></div><span style="color:var(--red);font-weight:900">10 pts</span></div>
+          <div class="case" id="assignmentCase">Una autoridad limita el acceso a cierta información pública. Identifica los derechos involucrados y construye un argumento jurídico.</div>
+          <div class="feedback" id="assignmentFeedback"><strong>Retroalimentación docente:</strong> Argumento claro. Fortalece tu conclusión con el principio de máxima publicidad.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="videos">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Mira antes de decidir</span>
+      <h2>Conoce nuestras clases y la forma de <span class="accent">acompañarte.</span></h2>
+      <p>Los videos deben permitir que el prospecto observe la experiencia antes de solicitar informes.</p>
+    </div>
+    <div class="video-grid">
+      <article class="video-main reveal">
+        <div class="thumb">
+          <img src="assets/clase-muestra.jpg" alt="Clase muestra de Derecho">
+          <button class="play" type="button" data-video="class">▶</button>
+          <div class="video-label"><b>Clase muestra · 3 minutos</b><small>Conoce la dinámica de una sesión en vivo</small></div>
+        </div>
+        <div class="video-body"><h3>Así se desarrolla una clase</h3><p>Presentación del tema, explicación, ejemplo profesional, participación y una actividad breve.</p></div>
+      </article>
+      <div class="video-stack">
+        <article class="video-side reveal">
+          <div class="thumb"><img src="assets/docente-modalidad.jpg" alt="Docente explicando su forma de trabajo"><button class="play" style="width:54px;height:54px;font-size:1rem" type="button" data-video="teacher">▶</button></div>
+          <div class="video-body"><h3>¿Cómo trabaja tu docente?</h3><p>Conoce cómo organiza las clases, responde dudas y evalúa tus actividades.</p></div>
+        </article>
+        <article class="video-side reveal">
+          <div class="thumb" style="background:linear-gradient(135deg,#071d52,#0c4ca1);display:grid;place-items:center"><div style="font-size:4rem;color:#fff">💻</div><button class="play" style="width:54px;height:54px;font-size:1rem" type="button" data-video="platform">▶</button></div>
+          <div class="video-body"><h3>Recorrido por Moodle UIM</h3><p>Materias, actividades, mensajes, grabaciones y retroalimentación.</p></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section benefits" id="beneficios">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="background:rgba(255,255,255,.1);color:#fff">Beneficios reales</span>
+      <h2>Una modalidad que se adapta a tu vida, <span class="accent">sin dejarte solo.</span></h2>
+    </div>
+    <div class="benefit-grid">
+      <article class="benefit reveal"><div class="icon">🗓</div><strong>Organiza mejor tus tiempos</strong><p>Combina tus estudios con actividades personales o laborales.</p></article>
+      <article class="benefit reveal"><div class="icon">▶</div><strong>Recupera y repasa tus clases</strong><p>Consulta las grabaciones cuando lo necesites.</p></article>
+      <article class="benefit reveal"><div class="icon">💬</div><strong>Mantén comunicación directa</strong><p>Resuelve dudas mediante mensajes y sesiones con tus docentes.</p></article>
+      <article class="benefit reveal"><div class="icon">✓</div><strong>Conoce cómo estás avanzando</strong><p>Recibe evaluación y retroalimentación sobre tus actividades.</p></article>
+      <article class="benefit reveal"><div class="icon">💻</div><strong>Desarrolla habilidades digitales</strong><p>Utiliza plataformas y herramientas presentes en el entorno laboral.</p></article>
+      <article class="benefit reveal"><div class="icon">🎯</div><strong>Aplica lo aprendido</strong><p>Trabaja casos, proyectos y ejercicios relacionados con tu profesión.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="oferta">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Oferta académica en línea</span>
+      <h2>Elige una carrera y descubre <span class="accent">cómo la vivirás.</span></h2>
+      <p>Cada licenciatura puede mostrar una clase muestra, ejemplo de actividad, perfil de egreso y oportunidades profesionales.</p>
+    </div>
+    <div class="career-grid">
+      <article class="career reveal"><div class="career-icon">⚖️</div><h3>Derecho</h3><p>Interpreta el marco jurídico y desarrolla soluciones con sentido ético.</p><button data-career="derecho">Conocer experiencia →</button></article>
+      <article class="career reveal"><div class="career-icon">🎓</div><h3>Ciencias de la Educación</h3><p>Diseña estrategias de aprendizaje e innovación para diversos contextos.</p><button data-career="educacion">Conocer experiencia →</button></article>
+      <article class="career reveal"><div class="career-icon">📊</div><h3>Contabilidad y Finanzas</h3><p>Analiza información financiera para orientar decisiones organizacionales.</p><button data-career="contabilidad">Conocer experiencia →</button></article>
+      <article class="career reveal"><div class="career-icon">💼</div><h3>Administración Gerencial</h3><p>Lidera equipos, proyectos y recursos con una visión estratégica.</p><button data-career="administracion">Conocer experiencia →</button></article>
+      <article class="career reveal"><div class="career-icon">🛡️</div><h3>Seguridad Pública</h3><p>Participa en estrategias de prevención, atención y gestión de seguridad.</p><button data-career="seguridad">Conocer experiencia →</button></article>
+      <article class="career reveal"><div class="career-icon">🔎</div><h3>Criminología y Criminalística</h3><p>Analiza conductas, contextos e indicios vinculados con investigación.</p><button data-career="criminologia">Conocer experiencia →</button></article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="perfil">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Visualiza tu futuro profesional</span>
+      <h2>Perfil de egreso <span class="accent">dinámico.</span></h2>
+      <p>Selecciona una licenciatura para conocer algunas capacidades que podrás desarrollar.</p>
+    </div>
+    <div class="profile-layout reveal">
+      <aside class="profile-side">
+        <img src="assets/logo-orgullo-uim.png" alt="">
+        <div><h3 id="profileSideTitle">Derecho</h3><p id="profileSideText">Formación jurídica con análisis, argumentación, ética y herramientas digitales.</p></div>
+      </aside>
+      <div class="profile-main">
+        <div class="profile-switch">
+          <button class="profile-btn active" data-profile="derecho">Derecho</button>
+          <button class="profile-btn" data-profile="educacion">Educación</button>
+          <button class="profile-btn" data-profile="administracion">Administración</button>
+          <button class="profile-btn" data-profile="contabilidad">Contabilidad</button>
+        </div>
+        <h2 id="profileTitle">Perfil de egreso · Derecho</h2>
+        <p class="profile-intro" id="profileIntro">Al concluir su formación, el egresado podrá interpretar situaciones jurídicas y construir respuestas fundamentadas.</p>
+        <div class="profile-grid" id="profileGrid">
+          <div class="profile-item"><b>Interpreta</b><p>Comprende y aplica normas y principios jurídicos.</p></div>
+          <div class="profile-item"><b>Argumenta</b><p>Construye razonamientos claros y profesionales.</p></div>
+          <div class="profile-item"><b>Propone</b><p>Desarrolla alternativas ante situaciones jurídicas.</p></div>
+          <div class="profile-item"><b>Comunica</b><p>Expresa ideas oralmente y por escrito con precisión.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section route" id="ruta">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">Una ruta de descubrimiento</span>
+      <h2>Conoce, prueba, elige y comienza <span class="accent">con seguridad.</span></h2>
+      <p>La ruta guía al prospecto desde la primera pregunta hasta una decisión informada.</p>
+    </div>
+    <div class="route-shell">
+      <div class="route-line"></div>
+      <div class="route-grid">
+        <div class="route-step reveal"><div class="route-dot">1</div><div class="route-icon">👀</div><h3>Conoce la modalidad</h3><p>Comprende horarios, clases y acompañamiento.</p></div>
+        <div class="route-step reveal"><div class="route-dot">2</div><div class="route-icon">▶</div><h3>Vive una clase</h3><p>Observa una muestra de tres minutos.</p></div>
+        <div class="route-step reveal"><div class="route-dot">3</div><div class="route-icon">💻</div><h3>Explora herramientas</h3><p>Conoce Moodle, Google y servicios.</p></div>
+        <div class="route-step reveal"><div class="route-dot">4</div><div class="route-icon">🎓</div><h3>Elige tu carrera</h3><p>Compara aprendizajes y perfiles.</p></div>
+        <div class="route-step reveal"><div class="route-dot">5</div><div class="route-icon">💬</div><h3>Recibe orientación</h3><p>Resuelve dudas antes de inscribirte.</p></div>
+        <div class="route-step reveal"><div class="route-dot">6</div><div class="route-icon">🚀</div><h3>Inicia tu experiencia</h3><p>Completa tu proceso y comienza tu ruta UIM.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta">
+  <div class="container">
+    <div class="cta-box reveal">
+      <div><h2>Conoce cómo estudiarás antes de tomar una decisión.</h2><p>Explora la experiencia, revisa la oferta académica y recibe orientación personalizada.</p></div>
+      <div class="cta-actions"><a class="btn btn-light" href="#experiencia">Repetir recorrido</a><a class="btn btn-outline" href="#oferta">Ver licenciaturas</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="container footer-row">
+    <div class="footer-brand"><img src="assets/logo-orgullo-uim.png" alt=""><div><strong style="color:#fff">Universidad Iberomexicana</strong><div style="font-size:.78rem">Propuesta visual de Licenciaturas en Línea</div></div></div>
+    <div style="font-size:.78rem">Los videos, testimonios, enlaces y datos académicos deben sustituirse por información institucional definitiva.</div>
+  </div>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-card">
+    <div class="modal-head">
+      <button class="modal-close" type="button" id="modalClose" aria-label="Cerrar">✕</button>
+      <span class="eyebrow" style="background:rgba(255,255,255,.11);color:#fff">Demostración</span>
+      <h2 id="modalTitle">Clase muestra</h2>
+      <p id="modalIntro">Este espacio debe utilizar un video institucional real.</p>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+const experienceData=[
+  {badge:'INICIO DE SEMANA',title:'Todo comienza con una ruta clara.',text:'Al ingresar a Moodle UIM encuentras tus materias, objetivos, materiales, fechas de entrega y actividades organizadas.',demo:'Lo que encontrarás',list:['Objetivo de aprendizaje','Materiales y recursos','Actividad de la semana','Fecha límite de entrega'],screen:'Mi semana académica',rows:[['Derecho Constitucional','Clase en vivo · Martes 7:00 p. m.'],['Actividad','Análisis de un caso · Entrega viernes'],['Material disponible','Lectura, presentación y video']],image:'assets/hero-estudiantes.jpg',sticker:'SEMANA LISTA',mini:'Tu ruta en Moodle UIM',visual:'Organiza tu avance y prepárate para tu clase.',pills:['Materiales','Fechas','Objetivos']},
+  {badge:'CLASE EN VIVO',title:'Participas, preguntas y construyes ideas.',text:'Dos veces por semana te conectas a una sesión de aproximadamente dos horas. El docente explica, utiliza ejemplos y atiende preguntas.',demo:'Durante la sesión',list:['Explicación del tema','Participación del grupo','Ejemplos profesionales','Resolución de dudas'],screen:'Sesión en vivo',rows:[['Docente conectado','Mtra. Samantha López'],['Tema','Principios constitucionales'],['Participación','Pregunta abierta al grupo']],image:'assets/clase-muestra.jpg',sticker:'EN VIVO',mini:'Aprende en tiempo real',visual:'Tu clase combina explicación, ejemplos y participación.',pills:['Participación','Ejemplos','Dudas']},
+  {badge:'APLICACIÓN',title:'Transformas la explicación en una evidencia.',text:'Después de la clase realizas una actividad relacionada con el tema: caso, proyecto, foro, cuestionario o investigación.',demo:'Qué puedes realizar',list:['Análisis de casos','Proyectos aplicados','Foros académicos','Actividades individuales'],screen:'Actividad semanal',rows:[['Producto','Análisis argumentado'],['Valor','10 puntos'],['Fecha límite','Viernes · 23:59']],image:'assets/docente-modalidad.jpg',sticker:'ACTIVIDAD',mini:'Aprende haciendo',visual:'Lleva la teoría a una actividad con enfoque profesional.',pills:['Caso','Proyecto','Foro']},
+  {badge:'RETROALIMENTACIÓN',title:'Sabes qué hiciste bien y cómo mejorar.',text:'Tus actividades son revisadas directamente por el docente. La calificación se acompaña de observaciones y recomendaciones.',demo:'La revisión incluye',list:['Criterios de evaluación','Observaciones específicas','Sugerencias de mejora','Calificación de la evidencia'],screen:'Actividad evaluada',rows:[['Resultado','9.5 / 10'],['Fortaleza','Argumentación clara'],['Mejora','Agregar fundamento jurídico']],image:'assets/docente-modalidad.jpg',sticker:'FEEDBACK',mini:'Acompañamiento docente',visual:'Recibe retroalimentación clara para fortalecer tu aprendizaje.',pills:['Revisión','Observaciones','Mejora']},
+  {badge:'FLEXIBILIDAD',title:'Si no pudiste conectarte, continúas.',text:'La grabación de la clase queda disponible para recuperar la sesión, repasar una explicación o resolver una actividad.',demo:'Puedes utilizarla para',list:['Recuperar la clase','Repasar un concepto','Preparar una actividad','Organizar tus tiempos'],screen:'Clase grabada',rows:[['Sesión','Teoría General del Estado'],['Duración','1 h 48 min'],['Estado','Disponible para reproducir']],image:'assets/clase-muestra.jpg',sticker:'A TU RITMO',mini:'Flexibilidad real',visual:'Las grabaciones te permiten continuar sin perder el ritmo.',pills:['Grabación','Repaso','Flexibilidad']}
+];
+const expTabs=[...document.querySelectorAll('.exp-tab')];
+const expDots=document.getElementById('expDots');
+experienceData.forEach((_,i)=>{const d=document.createElement('span');d.className='exp-dot'+(i===0?' active':'');expDots.appendChild(d)});
+function renderExperience(i){
+  const d=experienceData[i];
+  document.getElementById('expBadge').textContent=d.badge;
+  document.getElementById('expTitle').textContent=d.title;
+  document.getElementById('expText').textContent=d.text;
+  document.getElementById('expDemoTitle').textContent=d.demo;
+  document.getElementById('expList').innerHTML=d.list.map(x=>`<li>${x}</li>`).join('');
+  document.getElementById('screenTitle').textContent=d.screen;
+  document.getElementById('screenRows').innerHTML=d.rows.map(r=>`<div class="screen-row"><strong>${r[0]}</strong><br>${r[1]}</div>`).join('');
+  document.getElementById('expImage').src=d.image;
+  document.getElementById('expSticker').textContent=d.sticker;
+  document.getElementById('expMiniTag').textContent=d.mini;
+  document.getElementById('expVisualTitle').textContent=d.visual;
+  document.getElementById('expPills').innerHTML=d.pills.map(x=>`<span class="poster-pill">${x}</span>`).join('');
+  expTabs.forEach((b,n)=>b.classList.toggle('active',n===i));
+  [...expDots.children].forEach((x,n)=>x.classList.toggle('active',n===i));
+}
+expTabs.forEach((b,i)=>b.addEventListener('click',()=>renderExperience(i)));
+
+const ecoData={
+  moodle:{title:'Moodle UIM',text:'La plataforma principal de la comunidad en línea. Aquí encontrarás tus materias, actividades, materiales, mensajes, calificaciones y clases grabadas.',features:[['Mis asignaturas','Consulta contenidos y recursos organizados.'],['Actividades','Entrega evidencias y revisa fechas límite.'],['Mensajes','Comunícate directamente con tus docentes.'],['Retroalimentación','Consulta observaciones y calificaciones.']]},
+  google:{title:'Google Workspace',text:'Herramientas para crear, organizar y compartir trabajos individuales o colaborativos.',features:[['Google Drive','Organiza y comparte archivos.'],['Documentos','Desarrolla trabajos escritos.'],['Presentaciones','Comunica proyectos e ideas.'],['Hojas de cálculo','Analiza y organiza información.']]},
+  meet:{title:'Clases y reuniones en vivo',text:'Espacios de interacción en tiempo real para escuchar explicaciones, participar y resolver dudas.',features:[['Sesiones programadas','Dos veces por semana.'],['Participación','Preguntas y actividades durante la clase.'],['Comunicación','Contacto con docentes y compañeros.'],['Grabación','Consulta posterior de la sesión.']]},
+  vinculacion:{title:'Convenios y vinculación',text:'Servicios que conectan la formación académica con instituciones, organizaciones y oportunidades profesionales.',features:[['Información','Consulta opciones disponibles.'],['Orientación','Identifica alternativas relacionadas con tu carrera.'],['Vinculación','Acércate a entornos profesionales.'],['Seguimiento','Recibe acompañamiento institucional.']]},
+  servicio:{title:'Servicio social en línea',text:'Consulta requisitos, opciones y seguimiento de tu servicio social desde una ruta compatible con la modalidad.',features:[['Opciones','Conoce alternativas disponibles.'],['Requisitos','Identifica documentos y procesos.'],['Seguimiento','Consulta avances y observaciones.'],['Orientación','Recibe apoyo durante el proceso.']]}
+};
+document.querySelectorAll('.eco-btn').forEach(btn=>btn.addEventListener('click',()=>{
+  document.querySelectorAll('.eco-btn').forEach(x=>x.classList.remove('active'));btn.classList.add('active');
+  const d=ecoData[btn.dataset.eco];
+  document.getElementById('ecoTitle').textContent=d.title;document.getElementById('ecoText').textContent=d.text;
+  document.getElementById('ecoFeatures').innerHTML=d.features.map(x=>`<div class="eco-feature"><b>${x[0]}</b>${x[1]}</div>`).join('');
+}));
+
+const workData={
+  casos:{title:'Analiza casos relacionados con tu carrera.',text:'No solo memorizarás conceptos. Tendrás que interpretar una situación, identificar información importante y proponer una respuesta fundamentada.',points:['Relaciona la teoría con situaciones profesionales.','Desarrolla análisis y pensamiento crítico.','Recibe observaciones directas de tu docente.'],assignment:'Actividad · Análisis de caso',meta:'Derecho Constitucional',case:'Una autoridad limita el acceso a cierta información pública. Identifica los derechos involucrados y construye un argumento jurídico.',feedback:'Argumento claro. Fortalece tu conclusión con el principio de máxima publicidad.'},
+  proyectos:{title:'Construye proyectos que integran lo aprendido.',text:'Desarrolla productos más amplios que conectan varios temas y simulan retos profesionales.',points:['Organiza etapas y entregables.','Integra investigación y aplicación.','Presenta un resultado profesional.'],assignment:'Proyecto · Propuesta de intervención',meta:'Administración Gerencial',case:'Diseña una propuesta para mejorar un proceso de atención dentro de una organización.',feedback:'La estructura es adecuada. Agrega indicadores para medir los resultados.'},
+  foros:{title:'Argumenta y participa en conversaciones académicas.',text:'Comparte tu postura, responde a otros estudiantes y aprende a sustentar tus ideas.',points:['Expresa ideas con claridad.','Contrasta diferentes perspectivas.','Fortalece tu comunicación profesional.'],assignment:'Foro · Debate académico',meta:'Ciencias de la Educación',case:'¿Qué papel debe tener la tecnología dentro de una estrategia de aprendizaje?',feedback:'Tu postura es clara. Integra un ejemplo que muestre su aplicación.'},
+  colaborativo:{title:'Colabora utilizando herramientas digitales.',text:'Comparte documentos, organiza tareas y construye productos con otros estudiantes.',points:['Utiliza Google Drive y documentos compartidos.','Distribuye responsabilidades.','Desarrolla acuerdos y comunicación.'],assignment:'Actividad colaborativa',meta:'Contabilidad y Finanzas',case:'Construyan un presupuesto y presenten recomendaciones para mejorar el uso de recursos.',feedback:'La propuesta es viable. Revisen la justificación del gasto proyectado.'},
+  evaluaciones:{title:'Comprueba tu aprendizaje de distintas maneras.',text:'Las evaluaciones pueden integrar cuestionarios, entregas, exámenes, participación y proyectos.',points:['Identifica conceptos clave.','Aplica procedimientos y criterios.','Demuestra avances durante el periodo.'],assignment:'Evaluación parcial',meta:'Seguridad Pública',case:'Analiza una situación de riesgo y selecciona las medidas preventivas adecuadas.',feedback:'Respuesta correcta. Explica por qué descartaste las otras alternativas.'}
+};
+document.querySelectorAll('.work-tab').forEach(btn=>btn.addEventListener('click',()=>{
+  document.querySelectorAll('.work-tab').forEach(x=>x.classList.remove('active'));btn.classList.add('active');
+  const d=workData[btn.dataset.work];
+  document.getElementById('workTitle').textContent=d.title;document.getElementById('workText').textContent=d.text;
+  document.getElementById('workPoints').innerHTML=d.points.map(x=>`<div class="work-point"><span class="check">✓</span><span>${x}</span></div>`).join('');
+  document.getElementById('assignmentTitle').textContent=d.assignment;document.getElementById('assignmentMeta').textContent=d.meta;
+  document.getElementById('assignmentCase').textContent=d.case;document.getElementById('assignmentFeedback').innerHTML=`<strong>Retroalimentación docente:</strong> ${d.feedback}`;
+}));
+
+const profileData={
+  derecho:{name:'Derecho',side:'Formación jurídica con análisis, argumentación, ética y herramientas digitales.',intro:'Al concluir su formación, el egresado podrá interpretar situaciones jurídicas y construir respuestas fundamentadas.',items:[['Interpreta','Comprende y aplica normas y principios jurídicos.'],['Argumenta','Construye razonamientos claros y profesionales.'],['Propone','Desarrolla alternativas ante situaciones jurídicas.'],['Comunica','Expresa ideas oralmente y por escrito con precisión.']]},
+  educacion:{name:'Ciencias de la Educación',side:'Formación para diseñar, analizar y mejorar procesos educativos.',intro:'El egresado podrá diseñar estrategias de aprendizaje y participar en proyectos de innovación educativa.',items:[['Diseña','Construye estrategias y experiencias de aprendizaje.'],['Evalúa','Analiza avances y resultados educativos.'],['Innova','Integra recursos y metodologías actuales.'],['Acompaña','Participa en procesos de orientación y formación.']]},
+  administracion:{name:'Administración Gerencial',side:'Formación para liderar recursos, personas y proyectos.',intro:'El egresado podrá analizar organizaciones y proponer decisiones orientadas al logro de objetivos.',items:[['Planea','Define metas, recursos y acciones.'],['Lidera','Coordina equipos y proyectos.'],['Analiza','Interpreta información para tomar decisiones.'],['Mejora','Propone soluciones para procesos organizacionales.']]},
+  contabilidad:{name:'Contabilidad y Finanzas',side:'Formación para interpretar información financiera y apoyar decisiones.',intro:'El egresado podrá organizar, analizar y comunicar información contable y financiera.',items:[['Registra','Organiza operaciones e información contable.'],['Analiza','Interpreta resultados financieros.'],['Planea','Participa en presupuestos y proyecciones.'],['Comunica','Presenta información para la toma de decisiones.']]}
+};
+function renderProfile(key){
+  const d=profileData[key];
+  document.getElementById('profileSideTitle').textContent=d.name;document.getElementById('profileSideText').textContent=d.side;
+  document.getElementById('profileTitle').textContent=`Perfil de egreso · ${d.name}`;document.getElementById('profileIntro').textContent=d.intro;
+  document.getElementById('profileGrid').innerHTML=d.items.map(x=>`<div class="profile-item"><b>${x[0]}</b><p>${x[1]}</p></div>`).join('');
+  document.querySelectorAll('.profile-btn').forEach(b=>b.classList.toggle('active',b.dataset.profile===key));
+}
+document.querySelectorAll('.profile-btn').forEach(b=>b.addEventListener('click',()=>renderProfile(b.dataset.profile)));
+
+const modal=document.getElementById('modal');
+function openModal(title,intro,body){
+  document.getElementById('modalTitle').textContent=title;document.getElementById('modalIntro').textContent=intro;
+  document.getElementById('modalBody').innerHTML=body;modal.classList.add('active');document.body.classList.add('modal-open')
+}
+function closeModal(){modal.classList.remove('active');document.body.classList.remove('modal-open')}
+document.getElementById('modalClose').addEventListener('click',closeModal);
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+document.querySelectorAll('[data-video]').forEach(b=>b.addEventListener('click',()=>{
+  const type=b.dataset.video;
+  const content={
+    class:['Clase muestra · Derecho','Video sugerido de tres minutos para mostrar una sesión real.','<h3>Estructura sugerida</h3><div class="modal-list"><div>0:00–0:25 · Presentación del tema</div><div>0:25–1:30 · Explicación y ejemplo</div><div>1:30–2:30 · Caso o pregunta de aplicación</div><div>2:30–3:00 · Actividad y cierre</div></div>'],
+    teacher:['Así trabaja tu docente','Video breve para explicar acompañamiento, actividades y evaluación.','<h3>Temas que debe mencionar</h3><div class="modal-list"><div>Cómo organiza cada semana</div><div>Cómo atiende dudas por Moodle UIM</div><div>Qué actividades utiliza</div><div>Cómo evalúa y retroalimenta</div></div>'],
+    platform:['Recorrido por Moodle UIM','Video corto para conocer el espacio académico antes de inscribirse.','<h3>Recorrido sugerido</h3><div class="modal-list"><div>Inicio y asignaturas</div><div>Materiales y actividades</div><div>Mensajes y clases grabadas</div><div>Calificaciones y retroalimentación</div></div>']
+  }[type];openModal(...content)
+}));
+const careers={
+  derecho:['Derecho','Analiza casos, argumenta y comprende cómo se aplica el marco jurídico.','Clase muestra de Derecho Constitucional','Actividad: análisis de un caso jurídico','Perfil: interpretación, argumentación, comunicación y ética'],
+  educacion:['Ciencias de la Educación','Diseña experiencias de aprendizaje y estrategias para contextos educativos.','Clase muestra de Planeación Didáctica','Actividad: diseño de una estrategia de aprendizaje','Perfil: diseño, evaluación, innovación y acompañamiento'],
+  contabilidad:['Contabilidad y Finanzas','Interpreta información contable y financiera para apoyar decisiones.','Clase muestra de Análisis Financiero','Actividad: interpretación de estados financieros','Perfil: registro, análisis, planeación y comunicación'],
+  administracion:['Administración Gerencial','Gestiona equipos, proyectos y recursos dentro de organizaciones.','Clase muestra de Planeación Estratégica','Actividad: propuesta de mejora organizacional','Perfil: planeación, liderazgo, análisis y mejora'],
+  seguridad:['Seguridad Pública','Analiza riesgos y participa en estrategias de prevención y atención.','Clase muestra de Prevención del Riesgo','Actividad: análisis de una situación de seguridad','Perfil: prevención, análisis, gestión y servicio'],
+  criminologia:['Criminología y Criminalística','Analiza conductas, contextos e indicios relacionados con investigación.','Clase muestra de Criminología Aplicada','Actividad: análisis de un caso criminológico','Perfil: investigación, análisis, interpretación y comunicación']
+};
+document.querySelectorAll('[data-career]').forEach(b=>b.addEventListener('click',()=>{
+  const d=careers[b.dataset.career];
+  openModal(d[0],d[1],`<h3>Experiencia de esta licenciatura</h3><div class="modal-list"><div>${d[2]}</div><div>${d[3]}</div><div>${d[4]}</div><div>Plan de estudios, horarios y proceso de inscripción</div></div>`)
+}));
+
+const menuBtn=document.getElementById('menuBtn'),navLinks=document.getElementById('navLinks');
+menuBtn.addEventListener('click',()=>navLinks.classList.toggle('open'));
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navLinks.classList.remove('open')));
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}}),{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
